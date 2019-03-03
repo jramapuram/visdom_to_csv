@@ -4,7 +4,7 @@ A simple tool that pulls data from visdom and writes them to CSVs.
 
 ## Example Usage
 
-Grab all environments with `CIFAR10_` in their name and with `test_accuracy` as their window names and saves to unique CSVs.
+Grab **ALL** environments with `CIFAR10_` in their name and with `test_accuracy` as their window names and saves to unique CSVs.
 
 ```bash
 python main.py --visdom-url http://MYVISDOMINSTANCE \
