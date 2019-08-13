@@ -38,6 +38,8 @@ parser.add_argument('--x-label', type=str, default="epoch",
                     help='x-label for plot (default: epoch)')
 parser.add_argument('--y-label', type=str, default="test-accuracy",
                     help='y-label for plot (default: test-accuracy)')
+parser.add_argument('--legends', nargs='+', required=False, default=None,
+                    help='(optional) List of legend overrides, none uses env_name')
 parser.add_argument('--output', type=str, default="out.png",
                     help='output image filename (default: out.png)')
 
@@ -158,9 +160,10 @@ if __name__ == "__main__":
 
     # for each dict from above, merge them together and plot it
     plt.figure()
-    for df, name in zip(dfs, args.env_base_names):
+    for i, (df, name) in enumerate(zip(dfs, args.env_base_names)):
         merged_df = read_x_y(df, maxval=-1)
-        sns.lineplot(x=args.x_label, y=args.y_label, data=merged_df, label=name)
+        legend_name = name if args.legends is None else args.legends[i]
+        sns.lineplot(x=args.x_label, y=args.y_label, data=merged_df, label=legend_name)
 
     plt.title(args.title)
     plt.savefig(args.output, bbox_inches='tight')
