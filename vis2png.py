@@ -183,19 +183,12 @@ if __name__ == "__main__":
             legend_name = legend_basename + "-{}".format(legend_feature)
             ax = sns.lineplot(x=args.x_label, y=args.y_label, data=merged_df, label=legend_name)
 
-            # if args.x_range is not None:
-            #     assert len(args.x_range) == 2, "need min and max for xrange"
-            #     ax.set(xlim=(args.x_range[0], args.x_range[1]))
-
-            # if args.y_range is not None:
-            #     assert len(args.y_range) == 2, "need min and max for yrange"
-            #     ax.set(ylim=(args.y_range[0], args.y_range[1]))
-
-
+    # set xrange if specified
     if args.x_range is not None:
         assert len(args.x_range) == 2, "need min and max for xrange"
         plt.xlim([float(args.x_range[0]), float(args.x_range[1])])
 
+    # set yrange if specified
     if args.y_range is not None:
         assert len(args.y_range) == 2, "need min and max for yrange"
         plt.ylim([float(args.y_range[0]), float(args.y_range[1])])
