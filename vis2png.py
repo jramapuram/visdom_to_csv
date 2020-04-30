@@ -69,7 +69,7 @@ def vis2dataframe(viz, env_base_name, feature_name):
     assert env_base_name is not None, "need env base name"
     assert feature_name is not None, "need feature name"
     envs = [e for e in viz.get_env_list() if env_base_name in e]
-    assert len(envs) > 0, "no matching envs detected"
+    assert len(envs) > 0, "no matching envs detected for {}".format(env_base_name)
 
     # parse all envs
     json_blobs = [json.loads(viz.get_window_data(win=None, env=e)) for e in envs]
@@ -180,7 +180,11 @@ if __name__ == "__main__":
             merged_df = read_x_y(df, maxval=-1)
             legend_basename = name if args.legends is None else args.legends[i]
             legend_feature = feature_name if args.legend_features is None else args.legend_features[j]
-            legend_name = legend_basename + "-{}".format(legend_feature)
+            if legend_feature is not None and legend_feature.strip():
+                legend_name = legend_basename + "-{}".format(legend_feature)
+            else:
+                legend_name = legend_basename
+
             ax = sns.lineplot(x=args.x_label, y=args.y_label, data=merged_df, label=legend_name)
 
     # set xrange if specified
